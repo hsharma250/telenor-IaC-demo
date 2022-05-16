@@ -41,6 +41,7 @@ terraform {
     module_name = "blueprints/terraform/terraform-google-project-factory/v13.0.0"
   }
 }
+#Region and zone can be overriden in resource definition
 provider "google" {
   project = "test-project-350005"
   region  = "us-central1"
