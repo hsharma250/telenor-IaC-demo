@@ -52,9 +52,9 @@ following roles:
       --member="principalSet://iam.googleapis.com/${WORKLOAD_IDENTITY_POOL_ID}/attribute.repository/${REPO}"
   ```
 
-  ### 3. Pre-existing Resources
+### 3. Pre-existing Resources
 
-  - The organization and seed project should be set-up and inplace.
-  - Cloud storage bucket should be present to hold the state file with object versioning enable.
-  - The service account should be created in the seed project with required roles as mentioned above.
-  - If you want to run workflow on self hosted runner, please create the resource by using this module(https://github.com/terraform-google-modules/terraform-google-github-actions-runners)
+- The organization and seed project should be set-up and inplace.
+- Cloud storage bucket should be present to hold the state file with object versioning enable.
+- The service account should be created in the seed project with required roles as mentioned above.
+- If you want to run workflow on self hosted runner, please create the resource by using this module(https://github.com/terraform-google-modules/terraform-google-github-actions-runners)
