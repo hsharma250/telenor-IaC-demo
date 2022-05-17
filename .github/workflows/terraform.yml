@@ -44,7 +44,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Check credentisls file
+    - name: Check credentials file
       run: cat ${{ steps.auth.outputs.credentials_file_path }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
@@ -63,13 +63,13 @@ jobs:
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: terraform apply -auto-approve -input=false
-    #   env:
-    #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
-    
-    - name: Terraform Destroy
-      run: terraform destroy -auto-approve -input=false
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+    
+    # - name: Terraform Destroy
+    #   run: terraform destroy -auto-approve -input=false
+    #   env:
+    #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
