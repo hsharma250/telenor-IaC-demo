@@ -28,7 +28,7 @@ variable "repo_url" {
 variable "repo_name" {
   type        = string
   description = "Name of the repo for the Github Action"
-  default     = "telenor-IaC-demo"
+  default     = "telenor-iac-demo"
 }
 
 variable "repo_owner" {
