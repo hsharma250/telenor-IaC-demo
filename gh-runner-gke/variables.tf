@@ -40,5 +40,5 @@ variable "repo_owner" {
 variable "gh_token" {
   type        = string
   description = "Github token that is used for generating Self Hosted Runner Token"
-  default     = "AZEKID52XNFI7GPHLBMH4WTCQVOGO"
+  default     = "AZEKID5ONA4JHQM5QI3AIT3CQVPAK"
 }
