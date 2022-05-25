@@ -20,7 +20,7 @@ data "google_folders" "env-folder" {
 }
 
 module "folders_wktype" {
-  for_each = { for name in data.google_folders.env-folder.folders : name.name => name }
+  for_each = { for name in data.google_folders.env-folder[each.key].folders : name.name => name }
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
