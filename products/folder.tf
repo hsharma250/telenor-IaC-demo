@@ -23,7 +23,7 @@ module "folders_env" {
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
-  parent = "folders/${each.value.outputs.name}"
+  parent = "folders/${each.value.outputs.folders.name}"
 
   names = [
     "dev",
