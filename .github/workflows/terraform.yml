@@ -9,7 +9,7 @@ name: 'Terraform'
 on:
   push:
     branches:
-    - main
+    - test-hiera
   pull_request:
 
 permissions:
@@ -48,18 +48,34 @@ jobs:
       run: cat ${{ steps.auth.outputs.credentials_file_path }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
+    - name: Terraform Init WL
+      run: cd workload && terraform init
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
+    - name: Terraform Format WL
+      run: cd workload && terraform fmt -check
 
     # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan -input=false
+    - name: Terraform Plan WL
+      run: cd workload && terraform plan -input=false
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init Prod
+      run: cd products && terraform init
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format Prod
+      run: cd products && terraform fmt -check
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan Prod
+      run: cd products && terraform plan -input=false
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
