@@ -65,7 +65,7 @@ jobs:
     
     - name: Terraform Apply
       if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+      run: cd workload && terraform apply -auto-approve -input=false
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
