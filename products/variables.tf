@@ -65,7 +65,7 @@ variable "billing_account" {
 variable "folder_id" {
   description = "The ID of Workload folder"
   type        = string
-  default     = "969684602836"
+  default     = "895401449062"
 }
 
 variable "group_name" {
