@@ -18,26 +18,15 @@ terraform {
   required_version = ">=0.13.0"
   backend "gcs" {
     bucket = "tf-state-telenor"
-    prefix = "terraform/state"
+    prefix = "terraform/state1"
   }
   required_providers {
     google = {
       source  = "hashicorp/google"
       version = "~> 4.11"
     }
-    gsuite = {
-      source  = "DeviaVir/gsuite"
-      version = "~> 0.1"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "~> 4.11"
-    }
   }
   provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-project-factory/v13.0.0"
-  }
-  provider_meta "google-beta" {
     module_name = "blueprints/terraform/terraform-google-project-factory/v13.0.0"
   }
 }
@@ -46,18 +35,4 @@ provider "google" {
   project = "test-project-350005"
   region  = "us-central1"
   zone    = "us-central1-c"
-}
-provider "google-beta" {
-  project = "test-project-350005"
-  region  = "us-central1"
-  zone    = "us-central1-c"
-}
-provider "gsuite" {
-  impersonated_user_email = "terraform-sa-demo@test-project-350005.iam.gserviceaccount.com"
-  oauth_scopes = [
-    "https://www.googleapis.com/auth/admin.directory.group",
-    "https://www.googleapis.com/auth/apps.groups.settings",
-    "https://www.googleapis.com/auth/admin.directory.user",
-    "https://www.googleapis.com/auth/admin.directory.userschema",
-  ]
 }

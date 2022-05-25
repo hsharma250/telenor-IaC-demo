@@ -18,7 +18,7 @@ terraform {
   required_version = ">=0.13.0"
   backend "gcs" {
     bucket = "tf-state-telenor"
-    prefix = "terraform/state"
+    prefix = "terraform/state1"
   }
   required_providers {
     google = {
