@@ -28,6 +28,7 @@ module "folders" {
   names = [
     "product1",
     "product2",
+    "product3",
   ]
   # set_roles = true
 
