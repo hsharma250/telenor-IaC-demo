@@ -15,7 +15,7 @@
  */
 
 module "folders_env" {
-  for_each = toset(module.folders.output.ids)
+  for_each = toset(module.folders.ids)
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
