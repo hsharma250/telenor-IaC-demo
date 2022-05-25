@@ -15,11 +15,11 @@
  */
 
 module "folders" {
-  for_each   = toset(module.folders.ids)
-  source  = "terraform-google-modules/folders/google"
-  version = "~> 3.0"
+  for_each = toset(module.folders.ids)
+  source   = "terraform-google-modules/folders/google"
+  version  = "~> 3.0"
 
-  parent  = "folders/${each.key}"
+  parent = "folders/${each.key}"
 
   names = [
     "dev",

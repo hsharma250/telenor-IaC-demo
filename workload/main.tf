@@ -23,7 +23,7 @@ module "folders" {
   source  = "terraform-google-modules/folders/google"
   version = "~> 3.0"
 
-  parent  = "folders/${google_folder.workload.folder_id}"
+  parent = "folders/${google_folder.workload.folder_id}"
 
   names = [
     "product1",
