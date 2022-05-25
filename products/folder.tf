@@ -15,7 +15,7 @@
  */
 
 data "google_folder" "workload-folder" {
-  folder = "folders/${google_folder.workload.folder_id}"
+  folder = "folders/${var.folder_id}"
 }
 
 module "folders_env" {
