@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-data "google_folder" "workload-folder" {
+data "google_folders" "workload-folder" {
   folder = "folders/${var.folder_id}"
 }
 
 module "folders_env" {
-  for_each = data.google_folder.workload-folder
+  for_each = data.google_folders.workload-folder
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
