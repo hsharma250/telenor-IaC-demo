@@ -18,28 +18,28 @@ data "google_folders" "env-folder" {
   for_each  = { for name in data.google_folders.workload-folder.folders : name.name => name }
   parent_id = each.value.name
 }
+#Env-folder P1,P2,P3 -> d,s,p
+# module "folders_wktype" {
+#   #for_each = data.google_folders.env-folder[each.key].folders
+#   source   = "terraform-google-modules/folders/google"
+#   version  = "~> 3.0"
 
-module "folders_wktype" {
-  for_each = { for name in { for n in data.google_folders.env-folder : n.name => n } : name.name => name }
-  source   = "terraform-google-modules/folders/google"
-  version  = "~> 3.0"
+#   parent = each.value.name
 
-  parent = each.value.name
+#   names = [
+#     "exposed",
+#     "non-exposed",
+#     "secure"
+#   ]
+#   # set_roles = true
 
-  names = [
-    "exposed",
-    "non-exposed",
-    "secure"
-  ]
-  # set_roles = true
+#   # per_folder_admins = {
+#   #   dev = "group:gcp-developers@domain.com"
+#   #   staging = "group:gcp-qa@domain.com"
+#   #   production = "group:gcp-ops@domain.com"
+#   # }
 
-  # per_folder_admins = {
-  #   dev = "group:gcp-developers@domain.com"
-  #   staging = "group:gcp-qa@domain.com"
-  #   production = "group:gcp-ops@domain.com"
-  # }
-
-  # all_folder_admins = [
-  #   "group:gcp-security@domain.com",
-  # ]
-}
+#   # all_folder_admins = [
+#   #   "group:gcp-security@domain.com",
+#   # ]
+# }
