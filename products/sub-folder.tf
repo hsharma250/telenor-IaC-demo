@@ -15,7 +15,7 @@
  */
 
 data "google_folders" "env-folder" {
-  for_each = { for name in data.google_folders.workload-folder.folders : name.name => name }
+  for_each  = { for name in data.google_folders.workload-folder.folders : name.name => name }
   parent_id = each.value.name
 }
 
