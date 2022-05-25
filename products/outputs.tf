@@ -1,7 +1,7 @@
-# output "ids" {
-#   description = "Folder ids."
-#   value       = module.folders_env.ids
-# }
+output "ids" {
+  description = "Folder ids."
+  value       = values(module.folders_env)[*].ids
+}
 
 # output "names" {
 #   description = "Folder names."
