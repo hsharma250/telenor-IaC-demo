@@ -13,7 +13,7 @@ output "ids" {
 #   value       = module.folders_env.ids_list
 # }
 
-# output "names_list" {
-#   description = "List of folder names."
-#   value       = module.folders_env.names_list
-# }
+output "names_list" {
+  description = "List of folder names."
+  value       = values(module.folders_env)[*].names_list
+}
