@@ -21,7 +21,7 @@ data "google_folders" "env-folder" {
 
 #Env-folder P1,P2,P3 -> d,s,p
 module "folders_wktype" {
-  for_each = { for i,v in values(module.folders_env)[*].ids_list : i => v }
+  for_each = { for i, v in values(module.folders_env)[*].ids_list : i => v }
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
