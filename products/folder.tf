@@ -15,7 +15,7 @@
  */
 
 data "google_folders" "workload-folder" {
-  folder = "folders/${var.folder_id}"
+  parent_id = "folders/${var.folder_id}"
 }
 
 module "folders_env" {
