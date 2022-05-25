@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-# data "google_folders" "workload-folder" {
-#   parent_id = "folders/${var.folder_id}"
-# }
+data "google_folders" "workload-folder" {
+  parent_id = "folders/${var.folder_id}"
+}
 
 module "folders_env" {
-  for_each = module.folders.google_folder.folders
+  for_each = data.google_folders.workload-folder.folders
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
-  parent = "folders/${each.value.id}"
+  parent = "folders/${each.name}"
 
   names = [
     "dev",
