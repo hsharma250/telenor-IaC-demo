@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-module "folders" {
-  for_each = toset(module.folders.ids)
+module "folders_env" {
+  for_each = toset(module.folders.output.ids)
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
