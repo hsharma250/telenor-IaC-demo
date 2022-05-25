@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-data "google_folder" "workload-folder" {
+data "google_folders" "workload-folder" {
   folder = "workloads"
 }
 
