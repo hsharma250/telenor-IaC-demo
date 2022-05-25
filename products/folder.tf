@@ -19,7 +19,7 @@ data "google_folders" "workload-folder" {
 }
 
 module "folders_env" {
-  for_each = { for folder in data.google_folders.workload-folder.folders : folder.name => name }
+  for_each = { for folder in data.google_folders.workload-folder : folder.name => name }
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
