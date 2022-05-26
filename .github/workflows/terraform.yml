@@ -81,13 +81,15 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan Prod
-      run: cd products && terraform plan -input=false -var-file="dev-terraform.tfvars"
+      #run: cd products && terraform plan -input=false -var-file="dev-terraform.tfvars"
+      run: cd products && terraform plan -input=false -var-file="stage-terraform.tfvars"
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
-      run: cd products && terraform apply -auto-approve -input=false -var-file="dev-terraform.tfvars"
+      # run: cd products && terraform apply -auto-approve -input=false -var-file="dev-terraform.tfvars"
+      run: cd products && terraform apply -auto-approve -input=false -var-file="stage-terraform.tfvars"
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
     # - name: Terraform Destroy
