@@ -13,25 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-data "google_folders" "env-folder" {
-  for_each  = { for name in data.google_folders.workload-folder.folders : name.name => name }
-  parent_id = each.value.name
-}
-
-#Env-folder P1,P2,P3 -> d,s,p
 module "folders_wktype" {
-  for_each = { for i, v in values(module.folders_env)[*].ids_list : i => v }
+  for_each = local.folder-map
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
-  parent = each.value[0]
-
-  names = [
-    "exposed",
-    "non-exposed",
-    "secure"
-  ]
+  parent = each.value
+  names  = lookup(var.product_wktype_map, each.key)
+  # names = [
+  #   "exposed",
+  #   "non-exposed",
+  #   "secure"
+  # ]
   # set_roles = true
 
   # per_folder_admins = {

@@ -18,17 +18,22 @@ data "google_folders" "workload-folder" {
   parent_id = "folders/${var.folder_id}"
 }
 
+locals {
+  folder-map = {
+    for folder in data.google_folders.workload-folder.folders :
+    folder.display_name => folder.name
+  }
+}
+
 module "folders_env" {
-  for_each = { for name in data.google_folders.workload-folder.folders : name.name => name }
+  for_each = local.folder-map
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
-  parent = each.value.name
+  parent = each.key
 
   names = [
-    "dev",
-    "stage",
-    "prod"
+    "${var.env}"
   ]
   # set_roles = true
 
