@@ -21,7 +21,7 @@ module "tf_service_account" {
   org_id     = var.org_id
   prefix     = "telenor"
   names      = ["tf-sa"]
-  project_roles = [
-    "${module.seed_project_platform.project_id} =>roles/storage.objectAdmin",
-  ]
+  # project_roles = [
+  #   "${module.seed_project_platform.project_id}=>roles/storage.objectAdmin",
+  # ]
 }
