@@ -10,8 +10,9 @@ module "security_projects_kms" {
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
-  random_project_id = true
-  name              = "kms-telenor"
+  random_project_id = false
+  project_id        = "prj-telenor-${each.key}-${var.kms_project_suffix}"
+  name              = "prj-telenor-${each.key}-${var.kms_project_suffix}"
   org_id            = var.org_id
   billing_account   = var.billing_account
   folder_id         = each.value
@@ -28,8 +29,9 @@ module "security_projects_logsinks" {
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
-  random_project_id = true
-  name              = "log-sinks"
+  random_project_id = false
+  project_id        = "prj-telenor-${each.key}-${var.logsinks_project_suffix}"
+  name              = "prj-telenor-${each.key}-${var.logsinks_project_suffix}"
   org_id            = var.org_id
   billing_account   = var.billing_account
   folder_id         = each.value
@@ -46,7 +48,8 @@ module "security_projects_scc" {
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
-  random_project_id = true
+  random_project_id = false
+  project_id        = var.scc_project_id
   name              = "scc-telenor"
   org_id            = var.org_id
   billing_account   = var.billing_account
