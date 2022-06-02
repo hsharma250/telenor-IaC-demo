@@ -25,9 +25,3 @@ variable "divisions" {
   description = "Folder names for each environment."
   default     = ["Workloads", "Security"]
 }
-
-variable "state_bucket_name" {
-  type        = string
-  description = "Name of the bucket to store state file."
-  default     = "tf-state-telenor"
-}
