@@ -1,5 +1,5 @@
 module "security_projects_kms" {
-  for_each = { for folder in module.security_folders : folder.ids_list => ids_list }
+  for_each = { for folder in module.security_folders : folder.names_list => folder.ids_list }
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
@@ -7,7 +7,7 @@ module "security_projects_kms" {
   name              = "kms"
   org_id            = var.org_id
   billing_account   = var.billing_account
-  folder_id         = each.value.ids_list
+  folder_id         = each.value.folder
   #create_project_sa                  = var.create_project_sa
   #project_sa_name                    = var.project_sa_name
   #sa_role                            = var.sa_role
@@ -17,7 +17,7 @@ module "security_projects_kms" {
 }
 
 module "security_projects_logsinks" {
-  for_each = { for folder in module.security_folders : folder.ids_list => ids_list }
+  for_each = { for folder in module.security_folders : folder.names_list => folder.ids_list }
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
@@ -25,7 +25,7 @@ module "security_projects_logsinks" {
   name              = "log-sinks"
   org_id            = var.org_id
   billing_account   = var.billing_account
-  folder_id         = each.value.ids_list
+  folder_id         = each.value.folder
   #create_project_sa                  = var.create_project_sa
   #project_sa_name                    = var.project_sa_name
   #sa_role                            = var.sa_role
@@ -35,7 +35,7 @@ module "security_projects_logsinks" {
 }
 
 module "security_projects_scc" {
-  for_each = { for folder in module.security_folders : folder.ids_list => ids_list }
+  for_each = { for folder in module.security_folders : folder.names_list => folder.ids_list }
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
@@ -43,7 +43,7 @@ module "security_projects_scc" {
   name              = "scc"
   org_id            = var.org_id
   billing_account   = var.billing_account
-  folder_id         = each.value.ids_list
+  folder_id         = each.value.folder
   #create_project_sa                  = var.create_project_sa
   #project_sa_name                    = var.project_sa_name
   #sa_role                            = var.sa_role
