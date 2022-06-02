@@ -1,99 +1,99 @@
-# This workflow installs the latest version of Terraform CLI. On pull request events, this workflow will run
-# `terraform init`, `terraform fmt`, and `terraform plan`. On push events
-# to the master branch, `terraform apply` will be executed.
-#
-# Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
+# # This workflow installs the latest version of Terraform CLI. On pull request events, this workflow will run
+# # `terraform init`, `terraform fmt`, and `terraform plan`. On push events
+# # to the master branch, `terraform apply` will be executed.
+# #
+# # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 
-name: 'Terraform'
+# name: 'Terraform'
 
-on:
-  push:
-    branches:
-    - test-hiera
-  pull_request:
+# on:
+#   push:
+#     branches:
+#     - test-hiera
+#   pull_request:
 
-permissions:
-  id-token: write
+# permissions:
+#   id-token: write
 
-jobs:
-  terraform:
-    name: 'Terraform'
-    runs-on: ubuntu-latest
-    environment: production
+# jobs:
+#   terraform:
+#     name: 'Terraform'
+#     runs-on: ubuntu-latest
+#     environment: production
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
+#     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+#     defaults:
+#       run:
+#         shell: bash
 
-    steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
+#     steps:
+#     # Checkout the repository to the GitHub Actions runner
+#     - name: Checkout
+#       uses: actions/checkout@v3
 
-    #Get credentials for Service Account using OIDC  
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v0.4.0'
-      with:
-        create_credentials_file: 'true'
-        workload_identity_provider: 'projects/465996088825/locations/global/workloadIdentityPools/telenor-idpool/providers/telenor-git-provider'
-        service_account: 'terraform-sa-demo@test-project-350005.iam.gserviceaccount.com'
+#     #Get credentials for Service Account using OIDC  
+#     - id: 'auth'
+#       name: 'Authenticate to Google Cloud'
+#       uses: 'google-github-actions/auth@v0.4.0'
+#       with:
+#         create_credentials_file: 'true'
+#         workload_identity_provider: 'projects/465996088825/locations/global/workloadIdentityPools/telenor-idpool/providers/telenor-git-provider'
+#         service_account: 'terraform-sa-demo@test-project-350005.iam.gserviceaccount.com'
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+#     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+#     - name: Setup Terraform
+#       uses: hashicorp/setup-terraform@v1
 
-    - name: Check credentials file
-      run: cat ${{ steps.auth.outputs.credentials_file_path }}
+#     - name: Check credentials file
+#       run: cat ${{ steps.auth.outputs.credentials_file_path }}
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init WL
-      run: cd products && terraform init
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+#     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+#     - name: Terraform Init WL
+#       run: cd products && terraform init
+#       env:
+#         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format WL
-      run: cd products && terraform fmt -check
+#     # Checks that all Terraform configuration files adhere to a canonical format
+#     - name: Terraform Format WL
+#       run: cd products && terraform fmt -check
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan WL
-      run: cd products && terraform plan -input=false
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+#     # Generates an execution plan for Terraform
+#     - name: Terraform Plan WL
+#       run: cd products && terraform plan -input=false
+#       env:
+#         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
     
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
-      run: cd products && terraform apply -auto-approve -input=false
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+#     - name: Terraform Apply
+#       if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
+#       run: cd products && terraform apply -auto-approve -input=false
+#       env:
+#         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
-    # # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    # - name: Terraform Init Prod
-    #   run: cd products && terraform init
-    #   env:
-    #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+#     # # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+#     # - name: Terraform Init Prod
+#     #   run: cd products && terraform init
+#     #   env:
+#     #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
-    # # Checks that all Terraform configuration files adhere to a canonical format
-    # - name: Terraform Format Prod
-    #   run: cd products && terraform fmt -check
+#     # # Checks that all Terraform configuration files adhere to a canonical format
+#     # - name: Terraform Format Prod
+#     #   run: cd products && terraform fmt -check
 
-    # # Generates an execution plan for Terraform
-    # - name: Terraform Plan Prod
-    #   #run: cd products && terraform plan -input=false -var-file="dev-terraform.tfvars"
-    #   run: cd products && terraform plan -input=false -var-file="stage-terraform.tfvars"
-    #   env:
-    #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+#     # # Generates an execution plan for Terraform
+#     # - name: Terraform Plan Prod
+#     #   #run: cd products && terraform plan -input=false -var-file="dev-terraform.tfvars"
+#     #   run: cd products && terraform plan -input=false -var-file="stage-terraform.tfvars"
+#     #   env:
+#     #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
-    #   # run: cd products && terraform apply -auto-approve -input=false -var-file="dev-terraform.tfvars"
-    #   run: cd products && terraform apply -auto-approve -input=false -var-file="stage-terraform.tfvars"
-    #   env:
-    #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
-    # - name: Terraform Destroy
-    #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    #   run: cd gh-runner-gke && terraform destroy -auto-approve -input=false
-    #   env:
-    #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+#     # - name: Terraform Apply
+#     #   if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
+#     #   # run: cd products && terraform apply -auto-approve -input=false -var-file="dev-terraform.tfvars"
+#     #   run: cd products && terraform apply -auto-approve -input=false -var-file="stage-terraform.tfvars"
+#     #   env:
+#     #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+#     # - name: Terraform Destroy
+#     #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#     #   run: cd gh-runner-gke && terraform destroy -auto-approve -input=false
+#     #   env:
+#     #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"

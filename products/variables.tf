@@ -17,13 +17,6 @@
 variable "workloads_folder_id" {
   description = "The ID of Workload folder"
   type        = string
-  default     = "530995789471"
-}
-
-variable "labels" {
-  description = "Map of labels for project"
-  type        = map(string)
-  default     = {}
 }
 
 variable "environments" {
@@ -32,25 +25,9 @@ variable "environments" {
   default     = ["Dev", "Stage", "Prod"]
 }
 
-variable "state_env" {
-  description = "Environmeent to create project"
-  type        = string
-  default     = ""
-}
-
 variable "product_env_map" {
   description = "Map of products and Workload type"
   type        = map(any)
-  default = { "Product1" = [
-    "Dev",
-    "Stage",
-    "Prod"
-    ], "Product2" = [
-    "Dev",
-    "Stage"
-    ], "Product3" = [
-    "Dev"
-  ] }
 }
 
 variable "product_dev_wktype_map" {
@@ -81,9 +58,4 @@ variable "product_stage_wktype_map" {
 variable "product_prod_wktype_map" {
   description = "Map of products and Workload type"
   type        = map(any)
-  default = { "Product1" = [
-    "Non-Exposed"
-    ], "Product2" = [
-    "Non-Exposed"
-  ] }
 }
