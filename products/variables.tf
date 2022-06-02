@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-variable "folder_id" {
+variable "workloads_folder_id" {
   description = "The ID of Workload folder"
   type        = string
+  default     = "530995789471"
 }
 
 variable "labels" {
@@ -30,9 +31,27 @@ variable "env" {
   type        = string
   default     = ""
 }
-
+variable "state_env" {
+  description = "Environmeent to create project"
+  type        = string
+  default     = ""
+}
 variable "product_wktype_map" {
   description = "Map of products and Workload type"
   type        = map(any)
   default     = {}
+}
+variable "product_env_map" {
+  description = "Map of products and Workload type"
+  type        = map(any)
+  default     = { "Product1" = [
+  "Dev",
+  "Stage",
+  "Prod"
+  ], "Product2" = [
+  "Dev",
+  "Stage"
+  ], "Product3" = [
+  "Dev"
+] }
 }

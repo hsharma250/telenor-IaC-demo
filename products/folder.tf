@@ -14,20 +14,25 @@
  * limitations under the License.
  */
 
-data "google_folders" "product-folder" {
-  parent_id = "folders/${var.folder_id}"
+data "google_folders" "product-folders" {
+  parent_id = "folders/${var.workloads_folder_id}"
+}
+
+locals {
+  product-folderid-map = {
+    for folder in data.google_folders.product-folders.folders :
+    folder.display_name => folder.name
+  }
 }
 
 module "folders_env" {
-  for_each = { for name in data.google_folders.product-folder.folders : name.name => name }
+  for_each = local.product-folderid-map
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
-  parent = each.value.name
+  parent = each.value
 
-  names = [
-    "${var.env}"
-  ]
+  names = lookup(var.product_env_map, each.key)
   # set_roles = true
 
   # per_folder_admins = {
