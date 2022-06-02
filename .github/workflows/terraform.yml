@@ -63,11 +63,11 @@ jobs:
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
     
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
-    #   run: cd workload && terraform apply -auto-approve -input=false
-    #   env:
-    #     GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
+      run: cd security && terraform apply -auto-approve -input=false
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
     # # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     # - name: Terraform Init Prod
