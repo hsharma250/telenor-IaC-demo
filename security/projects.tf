@@ -1,4 +1,7 @@
 locals {
+  depends_on = [
+    module.security_folders
+  ]
   env_foldermap = {
     for folder in module.security_folders.folders :
     folder.name => folder.id
@@ -6,9 +9,6 @@ locals {
 }
 
 module "security_projects_kms" {
-  depends_on = [
-    module.security_folders
-  ]
   for_each = local.env_foldermap
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
@@ -27,9 +27,6 @@ module "security_projects_kms" {
 }
 
 module "security_projects_logsinks" {
-  depends_on = [
-    module.security_folders
-  ]
   for_each = local.env_foldermap
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
@@ -48,9 +45,6 @@ module "security_projects_logsinks" {
 }
 
 module "security_projects_scc" {
-  depends_on = [
-    module.security_folders
-  ]
   for_each = local.env_foldermap
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
