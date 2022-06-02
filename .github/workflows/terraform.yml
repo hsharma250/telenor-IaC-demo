@@ -49,23 +49,23 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init WL
-      run: cd security && terraform init
+      run: cd bootstrap && terraform init
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format WL
-      run: cd security && terraform fmt -check
+      run: cd bootstrap && terraform fmt -check
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan WL
-      run: cd security && terraform plan -input=false
+      run: cd bootstrap && terraform plan -input=false
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
     
-    - name: Terraform Destroy
+    - name: Terraform Apply
       if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
-      run: cd security && terraform destroy -auto-approve -input=false
+      run: cd bootstrap && terraform apply -auto-approve -input=false
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
