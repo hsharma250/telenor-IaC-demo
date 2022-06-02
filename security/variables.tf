@@ -38,10 +38,10 @@ variable "billing_account" {
   default     = "01346D-935252-68647E"
 }
 
-variable "kms_project_id" {
+variable "kms_project_suffix" {
   type        = string
-  description = "Project ID of the seed project."
-  default     = "prj-telenor-prd-seed"
+  description = "Project Suffix of the KMS project."
+  default     = "kms"
 }
 
 variable "logsinks_project_suffix" {

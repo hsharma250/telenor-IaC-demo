@@ -49,8 +49,8 @@ module "security_projects_scc" {
   version  = "~> 10.1"
 
   random_project_id = false
-  project_id        = var.scc_project_id
-  name              = "scc-telenor"
+  project_id        = "prj-telenor-${each.key}-${var.scc_project_suffix}"
+  name              = "prj-telenor-${each.key}-${var.scc_project_suffix}"
   org_id            = var.org_id
   billing_account   = var.billing_account
   folder_id         = each.value
