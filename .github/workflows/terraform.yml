@@ -59,7 +59,7 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan WL
-      run: cd platform && terraform plan -input=false
+      run: cd bootstrap && terraform plan -input=false
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
     
