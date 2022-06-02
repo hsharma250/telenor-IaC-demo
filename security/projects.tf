@@ -1,5 +1,5 @@
 module "security_projects_kms" {
-  for_each = { for ids_list in values(module.folders_env)[*].ids_list : ids_list => ids_list }
+  for_each = { for ids_list in values(module.security_folders)[*].ids_list : ids_list => ids_list }
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
@@ -17,7 +17,7 @@ module "security_projects_kms" {
 }
 
 module "security_projects_logsinks" {
-  for_each = { for ids_list in values(module.folders_env)[*].ids_list : ids_list => ids_list }
+  for_each = { for ids_list in values(module.security_folders)[*].ids_list : ids_list => ids_list }
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
@@ -35,7 +35,7 @@ module "security_projects_logsinks" {
 }
 
 module "security_projects_scc" {
-  for_each = { for ids_list in values(module.folders_env)[*].ids_list : ids_list => ids_list }
+  for_each = { for ids_list in values(module.security_folders)[*].ids_list : ids_list => ids_list }
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
 
