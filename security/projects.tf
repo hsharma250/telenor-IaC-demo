@@ -1,4 +1,7 @@
 module "security_projects_kms" {
+  depends_on = [
+    module.security_folders
+  ]
   for_each = toset([for folder in module.security_folders.folders : folder.id])
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
@@ -17,6 +20,9 @@ module "security_projects_kms" {
 }
 
 module "security_projects_logsinks" {
+  depends_on = [
+    module.security_folders
+  ]
   for_each = toset([for folder in module.security_folders.folders : folder.id])
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
@@ -35,6 +41,9 @@ module "security_projects_logsinks" {
 }
 
 module "security_projects_scc" {
+  depends_on = [
+    module.security_folders
+  ]
   for_each = toset([for folder in module.security_folders.folders : folder.id])
   source   = "terraform-google-modules/project-factory/google"
   version  = "~> 10.1"
