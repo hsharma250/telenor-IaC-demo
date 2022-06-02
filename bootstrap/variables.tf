@@ -23,7 +23,7 @@ variable "org_id" {
 variable "divisions" {
   type        = list(string)
   description = "Folder names for each environment."
-  default     = ["Workload", "Platform", "Security"]
+  default     = ["Workloads", "Platform", "Security"]
 }
 
 variable "billing_account" {

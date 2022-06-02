@@ -15,13 +15,16 @@
  */
 
 module "tf_service_account" {
+  depends_on = [
+    module.seed_project_platform
+  ]
   source     = "terraform-google-modules/service-accounts/google"
   version    = "~> 3.0"
   project_id = module.seed_project_platform.project_id
   org_id     = var.org_id
   prefix     = "telenor"
   names      = ["tf-sa"]
-  # project_roles = [
-  #   "${module.seed_project_platform.project_id}=>roles/storage.objectAdmin",
-  # ]
+  project_roles = [
+    "${module.seed_project_platform.project_id}=>roles/storage.objectAdmin",
+  ]
 }
