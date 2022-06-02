@@ -31,3 +31,15 @@ variable "billing_account" {
   type        = string
   default     = "01346D-935252-68647E"
 }
+
+variable "bucket_location" {
+  description = "The location of bucket"
+  type        = string
+  default     = "us-central1"
+}
+
+variable "bucket_name" {
+  description = "The name of storage bucket"
+  type        = string
+  default     = "telenor-sample-state-bkt"
+}
