@@ -21,7 +21,7 @@ data "google_folders" "product-folders" {
 locals {
   product-folderid-map = {
     for folder in data.google_folders.product-folders.folders :
-    folder.display_name => folder.name
+    folder.name => folder.display_name
   }
 }
 
@@ -32,7 +32,7 @@ module "folders_env" {
 
   parent = each.value
 
-  names = lookup(var.product_env_map, each.key)
+  names = lookup(var.product_env_map, each.value)
   # set_roles = true
 
   # per_folder_admins = {

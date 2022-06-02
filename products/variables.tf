@@ -31,16 +31,13 @@ variable "env" {
   type        = string
   default     = ""
 }
+
 variable "state_env" {
   description = "Environmeent to create project"
   type        = string
   default     = ""
 }
-variable "product_wktype_map" {
-  description = "Map of products and Workload type"
-  type        = map(any)
-  default     = {}
-}
+
 variable "product_env_map" {
   description = "Map of products and Workload type"
   type        = map(any)
@@ -53,5 +50,40 @@ variable "product_env_map" {
     "Stage"
     ], "Product3" = [
     "Dev"
+  ] }
+}
+
+variable "product_dev_wktype_map" {
+  description = "Map of products and Workload type"
+  type        = map(any)
+  default = { "Product1" = [
+    "Non-Exposed",
+    "Secure"
+    ], "Product2" = [
+    "Non-Exposed"
+    ], "Product3" = [
+    "Secure"
+  ] }
+}
+
+variable "product_stage_wktype_map" {
+  description = "Map of products and Workload type"
+  type        = map(any)
+  default = { "Product1" = [
+    "Non-Exposed"
+    ], "Product2" = [
+    "Non-Exposed"
+    ], "Product3" = [
+    "Secure"
+  ] }
+}
+
+variable "product_prod_wktype_map" {
+  description = "Map of products and Workload type"
+  type        = map(any)
+  default = { "Product1" = [
+    "Non-Exposed"
+    ], "Product2" = [
+    "Non-Exposed"
   ] }
 }
