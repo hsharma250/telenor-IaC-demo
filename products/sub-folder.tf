@@ -20,11 +20,11 @@ locals {
     lookup(local.product-folderid-map, folder.parent) => folder.name
   }
   product-stage-map = {
-    for folder in data.google_active_folder.dev :
+    for folder in data.google_active_folder.stage :
     lookup(local.product-folderid-map, folder.parent) => folder.name
   }
   product-prod-map = {
-    for folder in data.google_active_folder.dev :
+    for folder in data.google_active_folder.prod :
     lookup(local.product-folderid-map, folder.parent) => folder.name
   }
 }
