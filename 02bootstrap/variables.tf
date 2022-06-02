@@ -17,11 +17,9 @@
 variable "org_id" {
   description = "The organization ID."
   type        = string
-  default     = "435160234064"
 }
 
 variable "divisions" {
   type        = list(string)
-  description = "Folder names for each environment."
-  default     = ["Workloads", "Security"]
+  description = "Folder names for each Division apart from Platform."
 }
