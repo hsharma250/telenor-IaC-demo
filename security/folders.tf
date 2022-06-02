@@ -16,7 +16,7 @@
 
 data "google_active_folder" "security" {
   display_name = var.division_foldername
-  parent       = var.org_id
+  parent       = "organizations/${var.org_id}"
 }
 
 module "security_folders" {
