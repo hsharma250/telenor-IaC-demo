@@ -16,17 +16,14 @@
 variable "org_id" {
   description = "The organization ID."
   type        = string
-  default     = "435160234064"
 }
 
 variable "division_foldername" {
   description = "The Name of Division folder under which we want to create folder"
   type        = string
-  default     = "Workloads"
 }
 
 variable "products_list" {
   type        = list(string)
   description = "Folder names for each product."
-  default     = ["Product1", "Product2", "Product3"]
 }
