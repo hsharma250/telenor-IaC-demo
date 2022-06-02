@@ -27,7 +27,7 @@ module "seed_project_platform" {
 
   random_project_id = false
   project_id        = var.seed_project_id
-  name              = "seed"
+  name              = var.seed_project_id
   org_id            = var.org_id
   billing_account   = var.billing_account
   folder_id         = data.google_active_folder.platform.name
