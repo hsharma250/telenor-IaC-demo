@@ -11,7 +11,7 @@ module "security_projects_kms" {
   version  = "~> 10.1"
 
   random_project_id = true
-  name              = "kms"
+  name              = "kms-telenor"
   org_id            = var.org_id
   billing_account   = var.billing_account
   folder_id         = each.value
@@ -47,7 +47,7 @@ module "security_projects_scc" {
   version  = "~> 10.1"
 
   random_project_id = true
-  name              = "scc"
+  name              = "scc-telenor"
   org_id            = var.org_id
   billing_account   = var.billing_account
   folder_id         = each.value
