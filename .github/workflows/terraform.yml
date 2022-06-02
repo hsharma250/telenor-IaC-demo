@@ -63,9 +63,9 @@ jobs:
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
     
-    - name: Terraform Apply
+    - name: Terraform Destroy
       if: github.ref == 'refs/heads/test-hiera' && github.event_name == 'push'
-      run: cd security && terraform apply -auto-approve -input=false
+      run: cd security && terraform destroy -auto-approve -input=false
       env:
         GOOGLE_APPLICATION_CREDENTIALS: "${{ steps.auth.outputs.credentials_file_path }}"
 
