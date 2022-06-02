@@ -26,10 +26,10 @@ variable "labels" {
   default     = {}
 }
 
-variable "env" {
-  description = "Environmeent to create project"
-  type        = string
-  default     = ""
+variable "environments" {
+  type        = list(string)
+  description = "Folder names for each environment."
+  default     = ["Dev", "Stage", "Prod"]
 }
 
 variable "state_env" {

@@ -30,9 +30,9 @@ module "folders_env" {
   source   = "terraform-google-modules/folders/google"
   version  = "~> 3.0"
 
-  parent = each.value
+  parent = each.key
 
-  names = lookup(var.product_env_map, each.value)
+  names = var.environments
   # set_roles = true
 
   # per_folder_admins = {
