@@ -44,14 +44,14 @@ variable "product_wktype_map" {
 variable "product_env_map" {
   description = "Map of products and Workload type"
   type        = map(any)
-  default     = { "Product1" = [
-  "Dev",
-  "Stage",
-  "Prod"
-  ], "Product2" = [
-  "Dev",
-  "Stage"
-  ], "Product3" = [
-  "Dev"
-] }
+  default = { "Product1" = [
+    "Dev",
+    "Stage",
+    "Prod"
+    ], "Product2" = [
+    "Dev",
+    "Stage"
+    ], "Product3" = [
+    "Dev"
+  ] }
 }
