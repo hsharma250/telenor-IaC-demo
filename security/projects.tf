@@ -1,6 +1,6 @@
 locals {
   env_foldermap = {
-    for folder in module.security_folders.folders : 
+    for folder in module.security_folders.folders :
     folder.name => folder.id
   }
 }
