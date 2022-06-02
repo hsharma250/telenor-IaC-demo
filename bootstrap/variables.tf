@@ -17,35 +17,31 @@
 variable "org_id" {
   description = "The organization ID."
   type        = string
-  default     = "435160234064"
 }
 
 variable "divisions" {
   type        = list(string)
-  description = "Folder names for each environment."
-  default     = ["Workloads", "Platform", "Security"]
+  description = "Folder name for Platform folder to create seed project within it."
 }
 
 variable "seed_project_id" {
   type        = string
   description = "Project ID of the seed project."
-  default     = "prj-telenor-prd-seed"
 }
 
 variable "billing_account" {
   description = "The ID of the billing account to associate this project with"
   type        = string
-  default     = "01346D-935252-68647E"
-}
-
-variable "bucket_location" {
-  description = "The location of bucket"
-  type        = string
-  default     = "us-central1"
 }
 
 variable "bucket_name" {
   description = "The name of storage bucket"
   type        = string
   default     = "telenor-sample-state-bkt"
+}
+
+variable "bucket_location" {
+  description = "The location of bucket"
+  type        = string
+  default     = "us-central1"
 }
