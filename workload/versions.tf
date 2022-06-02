@@ -16,23 +16,13 @@
 
 terraform {
   required_version = ">=0.13.0"
-  backend "gcs" {
-    bucket = "tf-state-telenor"
-    prefix = "state/workloads"
-  }
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 4.11"
+      version = "4.22.0"
     }
   }
   provider_meta "google" {
     module_name = "blueprints/terraform/terraform-google-project-factory/v13.0.0"
   }
-}
-#Region and zone can be overriden in resource definition
-provider "google" {
-  project = "test-project-350005"
-  region  = "us-central1"
-  zone    = "us-central1-c"
 }

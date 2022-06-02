@@ -13,20 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-variable "org_id" {
-  description = "The organization ID."
-  type        = string
-  default     = "435160234064"
+
+data "google_active_folder" "workloads" {
+  display_name = var.division_foldername
+  parent       = "organizations/${var.org_id}"
 }
 
-variable "division_foldername" {
-  description = "The Name of Division folder under which we want to create folder"
-  type        = string
-  default     = "Workloads"
-}
+module "security_folders" {
+  source  = "terraform-google-modules/folders/google"
+  version = "~> 3.0"
 
-variable "products_list" {
-  type        = list(string)
-  description = "Folder names for each product."
-  default     = ["Product1", "Product2", "Product3"]
+  parent = data.google_active_folder.workloads.name
+
+  names = var.products_list
+  # set_roles = true
+
+  # per_folder_admins = {
+  #   dev = "group:gcp-developers@domain.com"
+  #   staging = "group:gcp-qa@domain.com"
+  #   production = "group:gcp-ops@domain.com"
+  # }
+
+  # all_folder_admins = [
+  #   "group:gcp-security@domain.com",
+  # ]
 }
