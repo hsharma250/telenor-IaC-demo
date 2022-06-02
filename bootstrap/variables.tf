@@ -26,6 +26,12 @@ variable "divisions" {
   default     = ["Workloads", "Platform", "Security"]
 }
 
+variable "seed_project_id" {
+  type        = string
+  description = "Project ID of the seed project."
+  default     = "prj-telenor-prd-seed"
+}
+
 variable "billing_account" {
   description = "The ID of the billing account to associate this project with"
   type        = string

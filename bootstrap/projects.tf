@@ -25,12 +25,13 @@ module "seed_project_platform" {
   source  = "terraform-google-modules/project-factory/google"
   version = "~> 10.1"
 
-  random_project_id = true
-  #project_id        = ""
+  random_project_id = false
+  project_id        = var.seed_project_id
   name              = "seed"
   org_id            = var.org_id
   billing_account   = var.billing_account
   folder_id         = data.google_active_folder.platform.name
+  bucket_project    = var.seed_project_id
   bucket_location   = var.bucket_location
   bucket_name       = var.bucket_name
   bucket_versioning = true
