@@ -58,11 +58,11 @@ data "google_active_folder" "prod" {
 }
 
 module "folders_dev_wktype" {
-  for_each = local.product-dev-map
-  source   = "terraform-google-modules/folders/google"
-  version  = "~> 3.0"
-  parent   = each.value
-  names    = lookup(var.product_dev_wktype_map, each.key)
+  count   = length(var.product_dev_wktype_map)
+  source  = "terraform-google-modules/folders/google"
+  version = "~> 3.0"
+  parent  = local.product-dev-map[keys(var.product_dev_wktype_map)[count.index]]
+  names   = values(var.product_dev_wktype_map)[count.index]
   # set_roles = true
 
   # per_folder_admins = {
@@ -77,11 +77,11 @@ module "folders_dev_wktype" {
 }
 
 module "folders_stage_wktype" {
-  for_each = local.product-stage-map
-  source   = "terraform-google-modules/folders/google"
-  version  = "~> 3.0"
-  parent   = each.value
-  names    = lookup(var.product_stage_wktype_map, each.key)
+  count   = length(var.product_stage_wktype_map)
+  source  = "terraform-google-modules/folders/google"
+  version = "~> 3.0"
+  parent  = local.product-stage-map[keys(var.product_stage_wktype_map)[count.index]]
+  names   = values(var.product_stage_wktype_map)[count.index]
   # set_roles = true
 
   # per_folder_admins = {
@@ -96,11 +96,11 @@ module "folders_stage_wktype" {
 }
 
 module "folders_prod_wktype" {
-  for_each = local.product-prod-map
-  source   = "terraform-google-modules/folders/google"
-  version  = "~> 3.0"
-  parent   = each.value
-  names    = lookup(var.product_prod_wktype_map, each.key)
+  count   = length(var.product_prod_wktype_map)
+  source  = "terraform-google-modules/folders/google"
+  version = "~> 3.0"
+  parent  = local.product-prod-map[keys(var.product_prod_wktype_map)[count.index]]
+  names   = values(var.product_prod_wktype_map)[count.index]
   # set_roles = true
 
   # per_folder_admins = {
